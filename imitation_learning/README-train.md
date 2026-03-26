@@ -16,10 +16,13 @@ This repository provides an end-to-end framework for recording, training, and de
 Before running the Imitation Learning modules, you must install the specific neural network toolchain and Grad-CAM visualization utilities. Ensure your CARLA Simulator is up and running.
 
 ```bash
-# Install PyTorch framework
-pip install torch torchvision
+conda create -n carla_il python=3.10 -y
+conda activate carla_il
 
-# Install required utilities for CARLA interfacing and Grad-CAM attention
+conda install -c conda-forge numpy pandas matplotlib typing_extensions -y
+
+pip install torch==2.10.0+cu128 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu128
+
 pip install numpy pygame opencv-python grad-cam
 ```
 
