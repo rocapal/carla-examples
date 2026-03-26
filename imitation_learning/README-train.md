@@ -23,7 +23,7 @@ conda install -c conda-forge numpy pandas matplotlib typing_extensions -y
 
 pip install torch==2.10.0+cu128 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu128
 
-pip install numpy pygame opencv-python grad-cam
+pip install numpy pygame opencv-python grad-cam carla
 ```
 
 > **Note:** As with the root repository, the `carla` Python package must be installed matching your local CARLA Simulator version (preferably via the `.egg` distribution).
@@ -41,7 +41,7 @@ For every frame (at $10$Hz), the `DatasetRecorder` concurrently dumps:
 
 **Usage:**
 ```bash
-python collect_dataset.py --dataset ./dataset/ --traffic
+python3 collect_dataset.py --dataset ./dataset/ --traffic
 ```
 
 ---
@@ -61,10 +61,10 @@ The training script manages dataset initialization, data augmentation, PyTorch h
 ### Usage Example:
 ```bash
 # Train on pure RGB with Data Augmentation (x3 size)
-python train.py --dataset_dir ./dataset/ --image_type rgb --data_aug --epochs 50
+python3 train.py --dataset_dir ./dataset/ --image_type rgb --epochs 50
 
 # Train on pure Mathematics (Semantic Modality)
-python train.py --dataset_dir ./dataset/ --image_type segsem --data_aug --epochs 50
+python3 train.py --dataset_dir ./dataset/ --image_type segsem  --epochs 50
 ```
 *Note: Checkpoints will be automatically saved as `il_best_pilotnet_rgb.pth` or `il_best_pilotnet_segsem.pth` preventing overwrites.*
 
@@ -78,7 +78,7 @@ Closes the loop by deploying the compiled `.pth` brain into the CARLA environmen
 
 **Usage:**
 ```bash
-python inference.py --model_path il_best_pilotnet_segsem.pth --image_type segsem
+python3 inference.py --model_path il_best_pilotnet_segsem.pth --image_type segsem
 ```
 
 *(Optional)* You can append the `--grad` flag to activate the real-time **Grad-CAM Attention Heatmap**, which will open a parallel visualization overlay on the left side of Pygame indicating exactly which physical pixels (e.g. road lines) the PilotNet is structurally focusing on to make its steering decisions.
